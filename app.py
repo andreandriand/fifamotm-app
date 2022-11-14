@@ -38,6 +38,8 @@ data = load_data()
 labels = data["risk_rating"]
 X = data.drop(columns=['risk_rating'])
 
+st.subheader('Dataset Credit Scoring')
+
 st.write(data)
 
 
@@ -51,7 +53,7 @@ with st.form(key ='Form1'):
         tanggungan = st.sidebar.number_input("Jumlah Tanggungan", min_value=0)   
         kpr = st.sidebar.radio('KPR', ('Aktif', 'Tidak'))
         durasi = st.sidebar.selectbox('Durasi Pinjaman', ('12 Bulan', '24 Bulan', '36 Bulan', '48 Bulan'))
-        overdue = st.sidebar.radio('Rata - Rata Keterlambatan', ('0-30 Hari', '31-45 Hari', '46-60 Hari', '61-90 Hari', '>90 Hari'))
+        overdues = st.sidebar.radio('Rata - Rata Keterlambatan', ('0-30 Hari', '31-45 Hari', '46-60 Hari', '61-90 Hari', '>90 Hari'))
         submitted1 = st.form_submit_button(label = 'Kalkulasi')
 
 
@@ -139,16 +141,16 @@ def modelData(overdue_0_30, overdue_31_45, overdue_46_60, overdue_61_90, overdue
         [overdue_0_30, overdue_31_45, overdue_46_60, overdue_61_90, overdue_90 ,kpr_tidak, kpr_aktif, pendapatan, durasi, tanggungan]
         ])[0]
 
-    return(f"Customer has risk rating {result_test_naive_bayes} based on Gaussian Naive Bayes model")
+    return(result_test_naive_bayes)
 
 
 if submitted1:
     kpr_aktif = 0
     kpr_tidak = 0
     if kpr == 'Aktif':
-        kpr = 1
+        kpr_aktif = 1
     else:
-        kpr = 0
+        kpr_tidak = 1
 
     if durasi == '12 Bulan':
         durasi = 12
@@ -160,13 +162,13 @@ if submitted1:
         durasi = 48
 
     overdue = [0,0,0,0,0]
-    if overdue == '0-30 Hari':
+    if overdues == '0-30 Hari':
         overdue[0] = 1
-    elif overdue == '31-45 Hari':
+    elif overdues == '31-45 Hari':
         overdue[1] = 1
-    elif overdue == '46-60 Hari':
+    elif overdues == '46-60 Hari':
         overdue[2] = 1
-    elif overdue == '61-90 Hari':
+    elif overdues == '61-90 Hari':
         overdue[3] = 1
     else:
         overdue[4] = 1
@@ -187,4 +189,14 @@ if submitted1:
 
     hitung = modelData(inputs['overdue_0-30'], inputs['overdue_31-45'], inputs['overdue_46-60'], inputs['overdue_61-90'], inputs['overdue_>90'], inputs['kpr_tidak'], inputs['kpr_aktif'], inputs['pendapatan'], inputs['durasi'], inputs['tanggungan'])
 
-    st.write(hitung)
+    st.subheader('Hasil Prediksi')
+
+    st.write("Customer dengan data :")
+
+    st.write("Pendapatan : ", pendapatan)
+    st.write("Durasi Pinjaman : ", durasi)
+    st.write("Jumlah Tanggungan : ", tanggungan)
+    st.write("KPR : ", kpr)
+    st.write("Overdue : ", overdues)
+
+    st.write("Memiliki resiko sebesar : ",hitung, "berdasarkan model Gaussian Naive Bayes")
