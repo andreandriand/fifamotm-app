@@ -49,8 +49,8 @@ st.sidebar.header('User Input Features')
 
 with st.form(key ='Form1'):
     with st.sidebar:
-        pendapatan = st.sidebar.number_input("Pendapatan Per Tahun", min_value=0, max_value=10000)   
-        tanggungan = st.sidebar.number_input("Jumlah Tanggungan", min_value=0)   
+        pendapatan = st.sidebar.number_input("Pendapatan Per Tahun (Juta)", min_value=0, max_value=10000)   
+        tanggungan = st.sidebar.number_input("Jumlah Tanggungan (Orang)", min_value=0)   
         kpr = st.sidebar.radio('KPR', ('Aktif', 'Tidak'))
         durasi = st.sidebar.selectbox('Durasi Pinjaman', ('12 Bulan', '24 Bulan', '36 Bulan', '48 Bulan'))
         overdues = st.sidebar.radio('Rata - Rata Keterlambatan', ('0-30 Hari', '31-45 Hari', '46-60 Hari', '61-90 Hari', '>90 Hari'))
@@ -193,9 +193,9 @@ if submitted1:
 
     st.write("Customer dengan data :")
 
-    st.write("Pendapatan : ", pendapatan)
-    st.write("Durasi Pinjaman : ", durasi)
-    st.write("Jumlah Tanggungan : ", tanggungan)
+    st.write("Pendapatan : ", pendapatan, "Juta")
+    st.write("Durasi Pinjaman : ", durasi, "Bulan")
+    st.write("Jumlah Tanggungan : ", tanggungan, "Orang")
     st.write("KPR : ", kpr)
     st.write("Overdue : ", overdues)
 
