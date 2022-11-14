@@ -26,7 +26,7 @@ warnings.filterwarnings('ignore')
 px.defaults.template = "plotly_dark"
 px.defaults.color_continuous_scale = 'reds'
 
-st.header('Credit Scoring')
+st.header('Prediksi Resiko Kredit Customer')
 
 def load_data():
     df = pd.read_csv('https://raw.githubusercontent.com/andreandriand/dataset/main/credit_score.csv')
