@@ -62,95 +62,9 @@ with st.form(key ='Form1'):
         ownGoal = st.sidebar.number_input("Own Goal", min_value=0)
         submitted1 = st.form_submit_button(label = 'Predict')
 
-
-
-
-# def modelData(overdue_0_30, overdue_31_45, overdue_46_60, overdue_61_90, overdue_90, kpr_tidak, kpr_aktif, pendapatan, durasi, tanggungan):
-#      #Mengubah Fitur "rata_rata_overdue" Menjadi Tipe Data Numerik
-
-#     data = load_data()
-
-#     labels = data["risk_rating"]
-#     X = data.drop(columns=['risk_rating'])
-
-#     split_overdue_X = pd.get_dummies(X["rata_rata_overdue"], prefix="overdue")
-#     X = X.join(split_overdue_X)
-
-#     X = X.drop(columns = "rata_rata_overdue")
-
-#     # Normalisasi Data
-
-#     KPR_status = pd.get_dummies(X["kpr_aktif"], prefix="KPR")
-#     X = X.join(KPR_status)
-
-#     # remove "rata_rata_overdue" feature
-#     X = X.drop(columns = "kpr_aktif")
-
-#     old_normalize_feature_labels = ['pendapatan_setahun_juta', 'durasi_pinjaman_bulan', 'jumlah_tanggungan']
-#     new_normalized_feature_labels = ['norm_pendapatan_setahun_juta', 'norm_durasi_pinjaman_bulan', 'norm_jumlah_tanggungan']
-#     normalize_feature = data[old_normalize_feature_labels]
-
-#     scaler = MinMaxScaler()
-#     scaler.fit(normalize_feature)
-
-#     normalized_feature = scaler.transform(normalize_feature)
-#     normalized_feature_data = pd.DataFrame(normalized_feature, columns = new_normalized_feature_labels)
-
-#     X = X.drop(columns = old_normalize_feature_labels)
-#     X = X.join(normalized_feature_data)
-#     X = X.join(labels)
-
-#     subject_lables = ["Unnamed: 0",  "kode_kontrak"]
-#     X = X.drop(columns = subject_lables)
-#     # percent_amount_of_test_data = / HUNDRED_PERCENT
-#     percent_amount_of_test_data = 0.3
-
-#     # Hitung data
-
-#     # values
-#     matrices_X = X.iloc[:,0:10].values
-
-#     # classes
-#     matrices_Y = X.iloc[:,10].values
-
-#     X_1 = X.iloc[:,0:10].values
-#     Y_1 = X.iloc[:, -1].values
-#     X_train, X_test, y_train, y_test = train_test_split(X_1, Y_1, test_size = percent_amount_of_test_data, random_state=0)
-
-
-#     # Implementasi gaussian naive bayes
-
-#     gaussian = GaussianNB()
-#     gaussian.fit(X_train, y_train)
-#     Y_pred = gaussian.predict(X_test) 
-#     accuracy_nb=round(accuracy_score(y_test,Y_pred)* 100, 2)
-#     acc_gaussian = round(gaussian.score(X_train, y_train) * 100, 2)
-
-#     cm = confusion_matrix(y_test, Y_pred)
-#     accuracy = accuracy_score(y_test,Y_pred)
-#     precision =precision_score(y_test, Y_pred,average='micro')
-#     recall =  recall_score(y_test, Y_pred,average='micro')
-#     f1 = f1_score(y_test,Y_pred,average='micro')
-#     st.write('Confusion matrix for Naive Bayes\n',cm)
-#     st.write('accuracy_Naive Bayes: %.3f' %accuracy)
-#     st.write('precision_Naive Bayes: %.3f' %precision)
-#     st.write('recall_Naive Bayes: %.3f' %recall)
-#     st.write('f1-score_Naive Bayes : %.3f' %f1)
-
-
-#     clf = GaussianNB()
-#     clf.fit(matrices_X, matrices_Y)
-#     clf_pf = GaussianNB()
-#     clf_pf.partial_fit(matrices_X, matrices_Y, np.unique(matrices_Y))
-
-#     result_test_naive_bayes = clf_pf.predict([
-#         [overdue_0_30, overdue_31_45, overdue_46_60, overdue_61_90, overdue_90 ,kpr_tidak, kpr_aktif, pendapatan, durasi, tanggungan]
-#         ])[0]
-
-#     return(result_test_naive_bayes)
-
-
 if submitted1:
+
+    st.subheader('Hasil Prediksi')
     
     modelGaussian = joblib.load('nb.joblib')
     modelKNN = joblib.load('knn.joblib')
@@ -217,8 +131,3 @@ if submitted1:
         st.write("Naive Bayes: Man of the Match")
     else:
         st.write("Naive Bayes: Not Man of the Match")
-
-    
-    st.write("Tree: ", pred)
-    st.write("KNN: ", pred1)
-    st.write("Gaussian: ", pred2)
