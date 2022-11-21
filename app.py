@@ -23,7 +23,7 @@ warnings.filterwarnings('ignore')
 px.defaults.template = "plotly_dark"
 px.defaults.color_continuous_scale = 'reds'
 
-st.header('Prediksi Resiko Kredit Customer')
+st.header('Aplikasi Prediksi Man of the Match Fifa World Cup')
 
 def load_data():
     df = pd.read_csv('https://raw.githubusercontent.com/andreandriand/dataset/main/FIFA%202018%20Statistics.csv')
@@ -203,3 +203,22 @@ if submitted1:
         st.write("Tree: Man of the Match")
     else:
         st.write("Tree: Not Man of the Match")
+
+    knn = joblib.load("knn.joblib")
+    pred1 = knn.predict(inputs)
+    if pred1[0] == "Yes":
+        st.write("KNN: Man of the Match")
+    else:
+        st.write("KNN: Not Man of the Match")
+
+    gaussian = joblib.load("nb.joblib")
+    pred2 = gaussian.predict(inputs)
+    if pred2[0] == "Yes":
+        st.write("Naive Bayes: Man of the Match")
+    else:
+        st.write("Naive Bayes: Not Man of the Match")
+
+    
+    st.write("Tree: ", pred)
+    st.write("KNN: ", pred1)
+    st.write("Gaussian: ", pred2)
