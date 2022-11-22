@@ -25,6 +25,9 @@ px.defaults.color_continuous_scale = 'reds'
 
 st.header('Aplikasi Prediksi Man of the Match Fifa World Cup')
 
+st.write("Aplikasi ini dibuat untuk memprediksi pemain yang akan menjadi Man of the Match atau pemain terbaik dalam suatu pertandingan piala dunia. Aplikasi ini memanfaatkan dataset yang berisi data statistik dari 128 pertandingan piala dunia 2018. Dataset ini dapat diakses pada link berikut: https://www.kaggle.com/mathan/fifa-2018-match-statistics")
+st.write("Aplikasi ini dibuat menggunakan bahasa pemrograman Python dan menggunakan beberapa library seperti Streamlit, Pandas, Numpy, dan Plotly. Serta menggunakan algoritma decision Tree, Naive Bayes, dan KNN. \n Untuk menggunakan aplikasi ini, anda harus memberikan inputan berupa Goal, Ball Possession, Attempt, Shot on Target, Shot off Target, Offside, Saves, Pass Accuracy, Passes Made, Distance Covered, Fouls Commited, Round, dan Own Goal \n Setelah memasukkan inputan, silahkan klik tombol 'Predict' untuk mendapatkan hasil prediksi.")
+
 def load_data():
     df = pd.read_csv('https://raw.githubusercontent.com/andreandriand/dataset/main/FIFA%202018%20Statistics.csv')
     return df
@@ -131,3 +134,8 @@ if submitted1:
         st.write("Naive Bayes: Man of the Match")
     else:
         st.write("Naive Bayes: Not Man of the Match")
+
+    # st.subheader('Akurasi Prediksi dari Setiap Algoritma')
+    # st.write("Decision Tree: ", accuracy_score(inputs[:,-1], tree.predict(inputs)))
+    # st.write("KNN: ", accuracy_score(inputs[:,-1], knn.predict(inputs)))
+    # st.write("Naive Bayes: ", accuracy_score(inputs[:,-1], gaussian.predict(inputs)))
