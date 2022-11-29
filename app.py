@@ -30,7 +30,7 @@ with tab1:
 
     st.write("Aplikasi ini dibuat untuk memprediksi pemain yang akan menjadi Man of the Match atau pemain terbaik dalam suatu pertandingan piala dunia. Aplikasi ini memanfaatkan dataset yang berisi data statistik dari 128 pertandingan piala dunia 2018. Dataset ini dapat diakses pada link berikut: https://www.kaggle.com/mathan/fifa-2018-match-statistics")
     st.write("Aplikasi ini dibuat menggunakan bahasa pemrograman Python dan menggunakan beberapa library seperti Streamlit, Pandas, Numpy, dan Plotly. Serta menggunakan algoritma decision Tree, Naive Bayes, dan KNN. \n Untuk menggunakan aplikasi ini, anda harus memberikan inputan berupa Goal, Ball Possession, Attempt, Shot on Target, Shot off Target, Offside, Saves, Pass Accuracy, Passes Made, Distance Covered, Fouls Commited, Round, dan Own Goal \n Setelah memasukkan inputan, silahkan klik tombol 'Predict' untuk mendapatkan hasil prediksi.")
-
+    st.write("Repository aplikasi ini dapat diakses pada link berikut: https://github.com/andreandriand/fifamotm-app")
     st.subheader('Dataset Statistic Fifa World Cup 2018')
 
     st.write(data)
